@@ -6,6 +6,7 @@
         <RootNamespace>TelegramBot_Timetable</RootNamespace>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
