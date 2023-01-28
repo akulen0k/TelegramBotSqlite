@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>TelegramBot_Timetable</RootNamespace>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Drapper" Version="1.2.0" />
+      <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.2" />
+      <PackageReference Include="Telegram.Bot" Version="19.0.0-preview.2" />
+      <PackageReference Include="Telegram.Bots.Extensions.Polling" Version="5.9.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Users" />
+    </ItemGroup>
+
+</Project>
