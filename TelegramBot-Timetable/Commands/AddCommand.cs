@@ -31,6 +31,7 @@ public class AddCommand : ICommand
         var sb = new StringBuilder("");
         for (int i = 2; i < cmd.Length; ++i)
             sb.Append(cmd[i]);
+            sb.Append(" ");
         
         var desc = sb.ToString();
         if (desc == "")
