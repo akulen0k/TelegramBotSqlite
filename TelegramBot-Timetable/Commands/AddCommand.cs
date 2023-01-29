@@ -39,7 +39,7 @@ public class AddCommand : ICommand
         if (desc == "")
             desc = null;
 
-        if (name.Length > 250 || desc.Length > 250)
+        if (name.Length > 250 || (desc is not null && desc.Length > 250))
         {
             await bot.SendTextMessageAsync(update.Message.Chat,
                 $"Название и описание задачи не должны быть длинее 250 символов.");
