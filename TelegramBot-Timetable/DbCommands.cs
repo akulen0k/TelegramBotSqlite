@@ -5,7 +5,7 @@ namespace TelegramBot_Timetable;
 
 public static class DbCommands
 {
-    private static readonly string path = "../../../Users/";
+    private static readonly string path = "";
     private static readonly string pathToUsers = path + "users.db";
     private static readonly string pathToTasks = path + "tasks.db";
     

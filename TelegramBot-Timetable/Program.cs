@@ -18,10 +18,14 @@ namespace TelegramBot_Timetable
 
         private static string GetToken()
         {
-            if (!File.Exists("../../../token.txt"))
+            if (!File.Exists("../../../token.txt") && !File.Exists("token.txt"))
                 throw new FileNotFoundException("The file token.txt doesn't exist in the current directory");
-                    
-            using (var sr = new StreamReader("../../../token.txt"))
+
+            string path = "token.txt";
+            if (File.Exists("../../../token.txt"))
+                path = "../../../token.txt";
+            
+            using (var sr = new StreamReader(path))
             {
                 var token = sr.ReadLine() ?? throw new Exception("The token was not found");
                 return token;

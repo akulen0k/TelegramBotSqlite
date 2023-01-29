@@ -6,7 +6,6 @@ WORKDIR /src
 COPY ["TelegramBot-Timetable.csproj", "TelegramBot-Timetable/"]
 RUN dotnet restore "TelegramBot-Timetable/TelegramBot-Timetable.csproj"
 COPY . .
-COPY token.txt .
 #WORKDIR "/src/TelegramBot-Timetable"
 RUN dotnet build "TelegramBot-Timetable.csproj" -c Release -o /app/build
 
@@ -16,4 +15,5 @@ RUN dotnet publish "TelegramBot-Timetable.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY token.txt .
 ENTRYPOINT ["dotnet", "TelegramBot-Timetable.dll"]
