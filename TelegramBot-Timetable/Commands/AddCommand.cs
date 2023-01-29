@@ -1,3 +1,4 @@
+using System.Text;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -25,7 +26,24 @@ public class AddCommand : ICommand
         }
         
         uid = DbCommands.GetUser(uid);
-        var curTask = new TimeTask(-1, (int)uid, 1, cmd[1], (cmd.Length < 3) ? null : cmd[2]);
+        var name = cmd[1];
+        
+        var sb = new StringBuilder("");
+        for (int i = 2; i < cmd.Length; ++i)
+            sb.Append(cmd[i]);
+        
+        var desc = sb.ToString();
+        if (desc == "")
+            desc = null;
+
+        if (name.Length > 250 || desc.Length > 250)
+        {
+            await bot.SendTextMessageAsync(update.Message.Chat,
+                $"Название и описание задачи не должны быть длинее 250 символов.");
+            return;
+        }
+        
+        var curTask = new TimeTask(-1, (int)uid, 1, name, desc);
         DbCommands.AddTask(curTask);
         Console.WriteLine($"Task added {curTask}");
         
