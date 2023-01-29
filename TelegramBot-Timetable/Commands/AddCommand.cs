@@ -27,8 +27,10 @@ public class AddCommand : ICommand
         uid = DbCommands.GetUser(uid);
         var curTask = new TimeTask(-1, (int)uid, 1, cmd[1], (cmd.Length < 3) ? null : cmd[2]);
         DbCommands.AddTask(curTask);
-        
         Console.WriteLine($"Task added {curTask}");
+        
+        await bot.SendTextMessageAsync(update.Message.Chat,
+            $"Задача успешно добавлена в список.");
     }
 
     public string GetHelpMsg()

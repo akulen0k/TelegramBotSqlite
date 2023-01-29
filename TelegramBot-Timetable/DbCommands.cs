@@ -19,7 +19,8 @@ public static class DbCommands
                 var command = new SqliteCommand();
                 command.Connection = connection;
                 command.CommandText = "CREATE TABLE Users(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," +
-                                      "userId BIGINT NOT NULL)";
+                                      "userId BIGINT NOT NULL," +
+                                      "chatId BIGINT NOT NULL)";
                 command.ExecuteNonQuery();
             }
         }
@@ -58,14 +59,14 @@ public static class DbCommands
         }
     }
     
-    public static void AddUser(long userid)
+    public static void AddUser(long userid, long chatid)
     {
         using (var connection = new SqliteConnection($"Data Source={pathToUsers}"))
         {
             connection.Open();
             var command = new SqliteCommand();
             command.Connection = connection;
-            command.CommandText = $"INSERT INTO Users (userId) VALUES ({userid})";
+            command.CommandText = $"INSERT INTO Users (userId, chatId) VALUES ({userid}, {chatid})";
             command.ExecuteNonQuery();
         }
     }
@@ -90,6 +91,14 @@ public static class DbCommands
                 
                 throw new Exception("Fatal db exception. Cant find user.");
             }
+        }
+    }
+    
+    public static User[] GetUsers()
+    {
+        using (var connection = new SqliteConnection($"Data Source={pathToUsers}"))
+        {
+            return connection.Query<User>($"SELECT * FROM Users").ToArray();
         }
     }
 

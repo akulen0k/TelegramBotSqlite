@@ -15,7 +15,7 @@ public class RegCommand : ICommand
         }
         else
         {
-            DbCommands.AddUser(userid);
+            DbCommands.AddUser(userid, update.Message.Chat.Id);
             await bot.SendTextMessageAsync(update.Message.Chat,
                 $"Регистрация успешно завершена.");
         }

@@ -32,6 +32,9 @@ public class ShowCommand : ICommand
             if (i + 1 < ls.Length)
                 sb.Append("\n");
         }
+
+        if (sb.ToString() == "")
+            sb.Append("Ваш список задач пуст.");
         
         await bot.SendTextMessageAsync(update.Message.Chat, sb.ToString());
     }

@@ -2,6 +2,7 @@ using System.Text;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 using TelegramBot_Timetable.Commands;
 
 
@@ -41,6 +42,9 @@ public class TgBot
             receiverOptions,
             cancellationToken
         );
+
+        SendToAllUsers();
+        
         Console.ReadLine();
     }
     
@@ -84,5 +88,39 @@ public class TgBot
         Console.WriteLine("ERROR");
         Console.ResetColor();
         Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(exception));
+    }
+
+    private async Task SendToAllUsers()
+    {
+        while (true)
+        {
+            if (DateTime.Today.ToUniversalTime().Hour == 5)
+            {
+                var users = DbCommands.GetUsers();
+                foreach (var v in users)
+                {
+                    Console.WriteLine(v.userId);
+                    _commands["/show"].Run(_bot, new Update()
+                    {
+                        Message = new Message()
+                        {
+                            From = new Telegram.Bot.Types.User()
+                            {
+                                Id = v.userId
+                            },
+                            Chat = new Chat()
+                            {
+                                Id = v.chatId
+                            }
+                        }
+                    });
+                }
+                await Task.Delay(1000 * 60 * 60 * 23);
+            }
+            else
+            {
+                await Task.Delay(1000 * 60 * 30);
+            }
+        }
     }
 }
