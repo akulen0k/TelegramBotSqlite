@@ -30,9 +30,11 @@ public class AddCommand : ICommand
         
         var sb = new StringBuilder("");
         for (int i = 2; i < cmd.Length; ++i)
+        {
             sb.Append(cmd[i]);
             sb.Append(" ");
-        
+        }
+
         var desc = sb.ToString();
         if (desc == "")
             desc = null;
@@ -43,7 +45,7 @@ public class AddCommand : ICommand
                 $"Название и описание задачи не должны быть длинее 250 символов.");
             return;
         }
-        
+
         var curTask = new TimeTask(-1, (int)uid, 1, name, desc);
         DbCommands.AddTask(curTask);
         Console.WriteLine($"Task added {curTask}");
