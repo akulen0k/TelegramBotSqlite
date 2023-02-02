@@ -94,7 +94,7 @@ public class TgBot
     {
         while (true)
         {
-            if (DateTime.Today.ToUniversalTime().Hour == 5)
+            if (DateTime.Today.ToUniversalTime().Hour == 7)
             {
                 var users = DbCommands.GetUsers();
                 foreach (var v in users)
@@ -115,11 +115,11 @@ public class TgBot
                         }
                     });
                 }
-                await Task.Delay(1000 * 60 * 60 * 23);
+                await Task.Delay(1000 * 60 * 65);
             }
             else
             {
-                await Task.Delay(1000 * 60 * 30);
+                await Task.Delay(1000 * 60);
             }
         }
     }
